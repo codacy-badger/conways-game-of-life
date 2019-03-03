@@ -1,0 +1,36 @@
+version: '0.0.{build}'
+image:
+  - Visual Studio 2017
+branches:
+  only:
+  - master
+deploy: off
+init:
+install:
+  - cmd: choco install sbt --version 1.2.8
+  - cmd: SET PATH=%PATH%;"%ProgramFiles(x86)%\sbt\bin"
+before_build:
+  - cmd: sbt clean
+build_script:
+  - cmd: sbt compile
+after_build:
+before_test:
+test_script:
+  - cmd: sbt test
+after_test:
+  - ps: |
+      $wc = New-Object 'System.Net.WebClient'
+      $results = Get-ChildItem (Resolve-Path ".\test-results") | Foreach-Object {
+        $wc.UploadFile("https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)", ($_.FullName))
+      }
+  - cmd: sbt package
+  - cmd: 7z a artifacts.zip .
+artifacts:
+  - path: artifacts.zip
+    name: artifacts
+    type: zip
+before_deploy:
+after_deploy:
+on_success:
+on_failure:
+on_finish:
