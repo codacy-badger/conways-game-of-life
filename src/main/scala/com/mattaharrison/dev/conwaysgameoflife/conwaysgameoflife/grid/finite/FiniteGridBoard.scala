@@ -1,6 +1,8 @@
-package com.mattaharrison.dev.conwaysgameoflife.conwaysgameoflife
+package com.mattaharrison.dev.conwaysgameoflife.conwaysgameoflife.grid.finite
 
 import scala.collection.immutable.{HashMap, HashSet}
+
+import com.mattaharrison.dev.conwaysgameoflife.conwaysgameoflife.{Board, Cell}
 
 /**
   * Board structures track live cells and upper boundaries on X and Y axis.
@@ -27,13 +29,13 @@ class FiniteGridBoard(val liveCells: Set[Cell], val limitX: Int, val limitY: Int
   private def countLiveNeighbours(): Map[Cell, Int] =
     this.liveCells.foldLeft(HashMap[Cell, Int]())(
       (liveNeighbourCount, liveCell) =>
-        Cell
-          .getNeighbours(this.limitX, this.limitY)(liveCell)
+        liveCell
+          .getNeighbours
           .foldLeft(liveNeighbourCount)((liveNeighbourCountAcc, cell) => {
-            if (liveNeighbourCount.contains(cell))
-              liveNeighbourCount.updated(cell, liveNeighbourCount(cell) + 1)
+            if (liveNeighbourCountAcc.contains(cell))
+              liveNeighbourCountAcc.updated(cell, liveNeighbourCountAcc(cell) + 1)
             else
-              liveNeighbourCount.updated(cell, 1)
+              liveNeighbourCountAcc.updated(cell, 1)
           }))
 
   private def findNextGeneration(currentGenerationLiveCells: Set[Cell],
