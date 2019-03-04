@@ -1,4 +1,4 @@
-package com.mattaharrison.dev.conwaysgameoflife.conwaysgameoflife
+package com.mattaharrison.dev.conwaysgameoflife
 
 /**
   * A board is a structure that tracks live cells and can be iterated to a new generation.

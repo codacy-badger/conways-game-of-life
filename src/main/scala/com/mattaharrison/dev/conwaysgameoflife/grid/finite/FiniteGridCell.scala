@@ -1,7 +1,7 @@
-package com.mattaharrison.dev.conwaysgameoflife.conwaysgameoflife.grid.finite
+package com.mattaharrison.dev.conwaysgameoflife.grid.finite
 
-import com.mattaharrison.dev.conwaysgameoflife.conwaysgameoflife.Cell
-import com.mattaharrison.dev.conwaysgameoflife.conwaysgameoflife.grid.GridCell
+import com.mattaharrison.dev.conwaysgameoflife.Cell
+import com.mattaharrison.dev.conwaysgameoflife.grid.GridCell
 
 /**
   * Finite grid cell structures have a coordinate on a 2D board bounded by X=0, some upper X limit,

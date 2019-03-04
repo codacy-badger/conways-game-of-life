@@ -1,8 +1,8 @@
-package com.mattaharrison.dev.conwaysgameoflife.conwaysgameoflife.grid
+package com.mattaharrison.dev.conwaysgameoflife.grid
 
 import scala.collection.immutable.HashSet
 
-import com.mattaharrison.dev.conwaysgameoflife.conwaysgameoflife.Cell
+import com.mattaharrison.dev.conwaysgameoflife.Cell
 
 /**
   * Grid cell structures have a coordinate on a 2D board.

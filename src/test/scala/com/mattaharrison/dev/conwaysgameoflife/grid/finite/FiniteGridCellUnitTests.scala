@@ -1,6 +1,5 @@
 package com.mattaharrison.dev.conwaysgameoflife.grid.finite
 
-import com.mattaharrison.dev.conwaysgameoflife.conwaysgameoflife.grid.finite.FiniteGridCell
 import org.scalatest.{FlatSpec, Matchers}
 
 class FiniteGridCellUnitTests extends FlatSpec with Matchers {

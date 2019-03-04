@@ -1,8 +1,8 @@
-package com.mattaharrison.dev.conwaysgameoflife.conwaysgameoflife.grid.finite
+package com.mattaharrison.dev.conwaysgameoflife.grid.finite
 
 import scala.collection.immutable.{HashMap, HashSet}
 
-import com.mattaharrison.dev.conwaysgameoflife.conwaysgameoflife.{Board, Cell}
+import com.mattaharrison.dev.conwaysgameoflife.{Board, Cell}
 
 /**
   * Board structures track live cells and upper boundaries on X and Y axis.
