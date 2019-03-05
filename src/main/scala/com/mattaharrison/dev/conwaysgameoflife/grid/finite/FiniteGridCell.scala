@@ -53,6 +53,35 @@ class FiniteGridCell(x: Int, y: Int, val limitX: Int, val limitY: Int) extends G
     super
       .getNeighbours
       .map(_.asInstanceOf[GridCell])
-      .filterNot(cell => cell.x < 0 || cell.x > this.limitX || cell.y < 0 || cell.y > this.limitY)
-      .map(cell => new FiniteGridCell(cell.x, cell.y, this.limitX, this.limitY))
+      .flatMap(FiniteGridCell.fromGridCell(limitX, limitY)(_))
+}
+
+/**
+  * Companion object for FiniteGridCell containing static helper logic.
+  */
+object FiniteGridCell {
+  /**
+    * Predicate to determine if a GridCell is within board limits.
+    *
+    * @param limitX   upper x-axis limit on the board.
+    * @param limitY   upper y-axis limit on the board.
+    * @param gridCell GridCell to check limits against.
+    *
+    * @return true if the GridCell is within the board limits.
+    */
+  def gridCellIsOutsideLimits(limitX: Int, limitY: Int)(gridCell: GridCell): Boolean =
+    gridCell.x < 0 || gridCell.x > limitX || gridCell.y < 0 || gridCell.y > limitY
+
+  /**
+    * Construct from a GridCell object.
+    *
+    * @param limitX   upper x-axis limit on the board.
+    * @param limitY   upper y-axis limit on the board.
+    * @param gridCell cell to take x and y coordinates from.
+    *
+    * @return the GridCell with finite board constraints, or None if the cell is outside the constraints.
+    */
+  def fromGridCell(limitX: Int, limitY: Int)(gridCell: GridCell): Option[FiniteGridCell] =
+    if (gridCellIsOutsideLimits(limitX, limitY)(gridCell)) None
+    else Some(new FiniteGridCell(gridCell.x, gridCell.y, limitX, limitY))
 }
